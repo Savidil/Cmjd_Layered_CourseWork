@@ -8,29 +8,27 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author Anjana
- */
 public class DBConnection {
-    private static DBConnection dBConnection;
-    
+    private static DBConnection dbConnection;
     private Connection connection;
     
-    private DBConnection() throws ClassNotFoundException, SQLException{
+    private DBConnection() throws ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Supermarket", "root", "mysql");
+        connection = DriverManager.getConnection(
+            "jdbc:mysql://localhost:3306/student_attendance_db", 
+            "root", 
+            "mysql"
+        );
     }
     
-    public static DBConnection getInstance() throws ClassNotFoundException, SQLException{
-        if(dBConnection == null){
-            dBConnection = new DBConnection();
+    public static DBConnection getInstance() throws ClassNotFoundException, SQLException {
+        if (dbConnection == null) {
+            dbConnection = new DBConnection();
         }
-        
-        return dBConnection;
+        return dbConnection;
     }
     
-    public Connection getConnection(){
+    public Connection getConnection() {
         return connection;
     }
 }
